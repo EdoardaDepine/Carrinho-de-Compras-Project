@@ -1,0 +1,26 @@
+.header {
+    background-color: brown;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    color: blueviolet;
+}
+
+.itens {
+    flex-direction: column;
+    background-color: blue;
+    align-self: left;
+    width: 70%;
+}
+
+.cart {
+    background-color: green;
+    flex-direction: column;
+    width: 30%;
+}
