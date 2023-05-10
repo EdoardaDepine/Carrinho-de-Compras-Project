@@ -31,17 +31,17 @@ async function getItemAPI(id) {
     const item = response.json();
     return item;
 }
-
 const insertionCartItens = document.querySelector(".cart-itens")
 
 function createCartItemElement(item) {
     return insertionCartItens.innerHTML += `
-  <li class=item>
+  <div class="item">
   <img class="img-item" src="${item.thumbnail}"/>
   <p>${item.id}</p>
   <p>${item.title}</p>
   <p>${item.price}</p>
-  </li>
+  <button class="button-removeItem">x</button>
+  </div>
   `;
 }
 
@@ -56,3 +56,17 @@ buttonsAddItemCartList.map((button) => {
         createCartItemElement(item);
     })
 })
+
+//REMOVE ITEM CART WITH DBLCLICK:
+function cartItemClickListener() {
+    const ul = document.querySelector(".cart-itens");
+    return ul.addEventListener("dblclick", (event) => {
+        const eventClick = event.target;
+        if (eventClick.innerHTML === "x") {
+            return eventClick.parentNode.remove()
+        }
+    })
+}
+cartItemClickListener()
+
+//SET ITEM LOCAL STORAGE:
