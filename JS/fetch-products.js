@@ -52,8 +52,9 @@ buttonsAddItemCartList.map((button) => {
         const buttonProduct = button.parentNode;
         const entireProduct = buttonProduct.children;
         const productId = entireProduct[1].innerHTML;
-        const item = await getItemAPI(productId);
-        createCartItemElement(item);
+        const entireItem = await getItemAPI(productId);
+        const item = createCartItemElement(entireItem);
+        saveCartItems(item);
     })
 })
 
@@ -69,4 +70,24 @@ function cartItemClickListener() {
 }
 cartItemClickListener()
 
-//SET ITEM LOCAL STORAGE:
+//LOCAL STORAGE:
+function getSavedCartItems() {
+    return JSON.parse(localStorage.getItem("cartItems")) || [];
+}
+
+function saveCartItems(product) {
+    if (localStorage.hasOwnProperty("cartItems")) {
+        return localStorage.setItem("cartItems", JSON.stringify([...getSavedCartItems(), product]));
+    } else {
+        localStorage.setItem('cartItems', JSON.stringify([product]))
+    }
+}
+
+function exibitionCartItensLocalStorage() {
+    const ul = document.querySelector(".cart-itens")
+    const cartItens = getSavedCartItems();
+    return cartItens.map((item) => {
+        ul.innerHTML += (item)
+    })
+}
+window.onload = exibitionCartItensLocalStorage()
