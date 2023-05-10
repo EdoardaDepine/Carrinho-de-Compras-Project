@@ -10,13 +10,32 @@
     display: flex;
     flex-direction: row;
     color: blueviolet;
+    height: 100%;
 }
 
 .itens {
-    flex-direction: column;
-    background-color: blue;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background-color: rgb(172, 172, 218);
     align-self: left;
     width: 70%;
+    height: 100%;
+    gap: 10px;
+}
+
+.product {
+    background-color: rgb(157, 255, 0);
+    border-radius: 10px;
+    height: 250px;
+    width: 400px;
+    border-color: black;
+}
+
+.img-product {
+    height: 50px;
+    width: 50px;
 }
 
 .cart {
