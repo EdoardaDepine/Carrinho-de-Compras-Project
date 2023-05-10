@@ -8,6 +8,7 @@ async function getProductsAPI(productsList) {
 }
 const products = await getProductsAPI("computador");
 const productsList = products.results;
+
 const insertionProducts = document.querySelector(".itens");
 
 function createProductItemElement(arrayProducts) {
@@ -31,32 +32,36 @@ async function getItemAPI(id) {
     const item = response.json();
     return item;
 }
+
 const insertionCartItens = document.querySelector(".cart-itens")
 
 function createCartItemElement(item) {
     return insertionCartItens.innerHTML += `
   <div class="item">
   <img class="img-item" src="${item.thumbnail}"/>
-  <p>${item.id}</p>
-  <p>${item.title}</p>
-  <p>${item.price}</p>
+  <p id="id-item">${item.id}</p>
+  <p id="title-item">${item.title}</p>
+  <p id="price-item">${item.price}</p>
   <button class="button-removeItem">x</button>
   </div>
   `;
 }
 
-const buttonsAddItemCartNode = document.querySelectorAll(".button-add-product");
-const buttonsAddItemCartList = Array.from(buttonsAddItemCartNode);
-buttonsAddItemCartList.map((button) => {
-    button.addEventListener("click", async function() {
-        const buttonProduct = button.parentNode;
-        const entireProduct = buttonProduct.children;
-        const productId = entireProduct[1].innerHTML;
-        const entireItem = await getItemAPI(productId);
-        const item = createCartItemElement(entireItem);
-        saveCartItems(item);
+function exibitionItensInCart() {
+    const buttonsAddItemCartNode = document.querySelectorAll(".button-add-product");
+    const buttonsAddItemCartList = Array.from(buttonsAddItemCartNode);
+    return buttonsAddItemCartList.map((button) => {
+        button.addEventListener("click", async function() {
+            const buttonProduct = button.parentNode;
+            const entireProduct = buttonProduct.children;
+            const productId = entireProduct[1].innerHTML;
+            const entireItem = await getItemAPI(productId);
+            const item = createCartItemElement(entireItem);
+            saveCartItems(item);
+        })
     })
-})
+}
+exibitionItensInCart()
 
 //REMOVE ITEM CART WITH DBLCLICK:
 function cartItemClickListener() {
@@ -87,7 +92,21 @@ function exibitionCartItensLocalStorage() {
     const ul = document.querySelector(".cart-itens")
     const cartItens = getSavedCartItems();
     return cartItens.map((item) => {
-        ul.innerHTML += (item)
+        ul.innerHTML = `${item}`
     })
 }
 window.onload = exibitionCartItensLocalStorage()
+
+
+//CALCUATED ALL PRICES CART ITENS:
+function calculateAllPriceCartItems() {
+    const subtotal = document.querySelector(".subtotal-itens");
+    const pricesNode = document.querySelectorAll("#price-item")
+    const pricesList = Array.from(pricesNode);
+    const pricesValue = pricesList.map((item) => item.innerHTML);
+    const somePrices = pricesValue.reduce((pv, cv) => {
+        return Number(pv) + Number(cv);
+    })
+    return subtotal.innerText = `R$${somePrices.toFixed(2)}`;
+}
+calculateAllPriceCartItems();
