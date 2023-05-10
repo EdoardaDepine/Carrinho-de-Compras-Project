@@ -58,6 +58,7 @@ function exibitionItensInCart() {
             const entireItem = await getItemAPI(productId);
             const item = createCartItemElement(entireItem);
             saveCartItems(item);
+            window.location.reload();
         })
     })
 }
@@ -100,13 +101,24 @@ window.onload = exibitionCartItensLocalStorage()
 
 //CALCUATED ALL PRICES CART ITENS:
 function calculateAllPriceCartItems() {
-    const subtotal = document.querySelector(".subtotal-itens");
+    const subtotal = document.querySelector(".total-price");
     const pricesNode = document.querySelectorAll("#price-item")
     const pricesList = Array.from(pricesNode);
     const pricesValue = pricesList.map((item) => item.innerHTML);
     const somePrices = pricesValue.reduce((pv, cv) => {
         return Number(pv) + Number(cv);
     })
-    return subtotal.innerText = `R$${somePrices.toFixed(2)}`;
+    return subtotal.innerText = `Subtotal: R$${somePrices}`;
 }
 calculateAllPriceCartItems();
+
+//CLEAR CART:
+function clearAllCartItens() {
+    const buttonClear = document.querySelector(".empty-cart");
+    const clear = buttonClear.addEventListener("click", () => {
+        localStorage.clear();
+        window.location.reload();
+    })
+    return clear;
+}
+clearAllCartItens();
