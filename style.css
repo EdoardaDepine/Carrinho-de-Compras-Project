@@ -1,15 +1,30 @@
 .header {
-    background-color: brown;
+    background-color: rgb(3, 64, 22);
+    color: white;
+    font-family: "Epilogue", sans-serif;
+    text-decoration: double;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    height: 70px;
+}
+
+.contaier-title {
+    padding-left: 40px;
+    font-size: 30px;
+}
+
+.container-cart-title {
+    padding-right: 200px;
+    font-size: 22px;
 }
 
 .container {
     display: flex;
     flex-direction: row;
-    color: blueviolet;
+    background-color: rgb(249, 249, 252);
     height: 100%;
 }
 
@@ -17,8 +32,9 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
-    background-color: rgb(172, 172, 218);
+    justify-content: space-evenly;
+    margin: 60px;
+    background-color: rgb(249, 249, 252);
     align-self: left;
     width: 70%;
     height: 100%;
@@ -26,20 +42,58 @@
 }
 
 .product {
-    background-color: rgb(157, 255, 0);
-    border-radius: 10px;
-    height: 250px;
-    width: 400px;
+    background-color: white;
+    color: black;
+    font-family: "Epilogue", sans-serif;
+    border-radius: 4px;
+    height: 500px;
+    width: 300px;
+    box-shadow: 0.5px 0.5px 3px rgb(183, 182, 182);
     border-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 11px;
+    gap: 1px;
 }
 
 .img-product {
-    height: 50px;
-    width: 50px;
+    height: 180px;
+    width: 200px;
+    align-self: top;
+}
+
+#id-product {
+    font-size: 10px;
+}
+
+#title-product {
+    font-family: "Epilogue", sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+#price-product {
+    font-weight: bold;
+    font-size: larger;
+    font-family: sans-serif;
+}
+
+.button-add-product {
+    background-color: rgb(8, 54, 240);
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 3px;
+    height: 35px;
+    width: 270px;
+    justify-content: center;
+    align-self: center;
 }
 
 .cart {
-    background-color: green;
+    background-color: rgb(235, 239, 235);
     flex-direction: column;
     width: 30%;
 }

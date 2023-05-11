@@ -18,7 +18,7 @@ function createProductItemElement(arrayProducts) {
     <img class="img-product" src="${product.thumbnail}"/>
     <p id="id-product">${product.id}</p>
     <p id="title-product">${product.title}</p>
-    <p id="price-product">${product.price}</p>
+    <p id="price-product">R$${product.price}</p>
     <button class="button-add-product">Adicionar ao carrinho</button>
     </div>
     `;
