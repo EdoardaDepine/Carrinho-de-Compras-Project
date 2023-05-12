@@ -17,7 +17,9 @@ function createProductItemElement(arrayProducts) {
     <div class=product>
     <img class="img-product" src="${product.thumbnail}"/>
     <p id="id-product">${product.id}</p>
+    <div class="div-title-product">
     <p id="title-product">${product.title}</p>
+    </div>
     <p id="price-product">R$${product.price}</p>
     <button class="button-add-product">Adicionar ao carrinho</button>
     </div>
@@ -40,7 +42,9 @@ function createCartItemElement(item) {
   <div class="item">
   <img class="img-item" src="${item.thumbnail}"/>
   <p id="id-item">${item.id}</p>
+  <div class="div-title-item">
   <p id="title-item">${item.title}</p>
+  </div>
   <p id="price-item">${item.price}</p>
   <button class="button-removeItem">x</button>
   </div>
@@ -64,10 +68,10 @@ function exibitionItensInCart() {
 }
 exibitionItensInCart()
 
-//REMOVE ITEM CART WITH DBLCLICK:
+//REMOVE ITEM CART WITH CLICK:
 function cartItemClickListener() {
     const ul = document.querySelector(".cart-itens");
-    return ul.addEventListener("dblclick", (event) => {
+    return ul.addEventListener("click", (event) => {
         const eventClick = event.target;
         if (eventClick.innerHTML === "x") {
             return eventClick.parentNode.remove()
@@ -98,6 +102,11 @@ function exibitionCartItensLocalStorage() {
 }
 window.onload = exibitionCartItensLocalStorage()
 
+function removeCartItemLocalStorage(product) {
+    const cartItemsLocalStorage = getSavedCartItems();
+    return cartItemsLocalStorage.filter((item) => item !== product);
+}
+
 
 //CALCUATED ALL PRICES CART ITENS:
 function calculateAllPriceCartItems() {
@@ -105,10 +114,11 @@ function calculateAllPriceCartItems() {
     const pricesNode = document.querySelectorAll("#price-item")
     const pricesList = Array.from(pricesNode);
     const pricesValue = pricesList.map((item) => item.innerHTML);
-    const somePrices = pricesValue.reduce((pv, cv) => {
-        return Number(pv) + Number(cv);
+    const somePricesString = pricesValue.reduce((pv, cv) => {
+        return (pv) + (cv);
     })
-    return subtotal.innerText = `Subtotal: R$${somePrices}`;
+    const somePricesNumber = parseInt(somePricesString);
+    return subtotal.innerText = `Subtotal: R$${somePricesNumber.toFixed(2)}`;
 }
 calculateAllPriceCartItems();
 
